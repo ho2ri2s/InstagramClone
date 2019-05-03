@@ -1,5 +1,6 @@
 package com.kurus.instagramclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnSignUpLoginActivity.setOnClickListener(this);
 
         if(ParseUser.getCurrentUser() != null){
-            ParseUser.getCurrentUser().logOut();
+        transitionToSocialMediaActivity();
         }
 
     }
@@ -49,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     FancyToast.makeText(LoginActivity.this,
                                             user.get("username") + "is Log in successfully!",
                                             FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                                    transitionToSocialMediaActivity();
                                 }
                             }
                         });
@@ -57,6 +59,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnSignUpLoginActivity:
                 break;
         }
+    }
 
+    public void transitionToSocialMediaActivity(){
+        Intent intent = new Intent(LoginActivity.this, SocialMediaActivity.class);
+        startActivity(intent);
     }
 }

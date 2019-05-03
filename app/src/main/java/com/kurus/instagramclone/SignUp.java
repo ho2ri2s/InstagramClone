@@ -49,7 +49,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         });
 
         if (ParseUser.getCurrentUser() != null) {
-            ParseUser.getCurrentUser().logOut();
+            transitionToSocialMediaActivity();
         }
 
     }
@@ -82,13 +82,13 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         public void done(ParseException e) {
                             if (e == null) {
                                 FancyToast.makeText(SignUp.this, appUser.get("username") + "is signed up successfully!", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                                transitionToSocialMediaActivity();
                             } else {
                                 FancyToast.makeText(SignUp.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
                             }
                             progressDialog.dismiss();
                         }
                     });
-
                 }
                 break;
             case R.id.btnLogIn:
@@ -110,6 +110,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+
+    public void transitionToSocialMediaActivity(){
+        Intent intent = new Intent(SignUp.this, SocialMediaActivity.class);
+        startActivity(intent);
     }
 }
