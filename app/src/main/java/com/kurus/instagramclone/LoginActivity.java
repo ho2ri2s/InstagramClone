@@ -2,15 +2,16 @@ package com.kurus.instagramclone;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.shashank.sony.fancytoastlib.FancyToast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -47,9 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void done(ParseUser user, ParseException e) {
                                 if(user != null && e == null){
-                                    FancyToast.makeText(LoginActivity.this,
-                                            user.get("username") + "is Log in successfully!",
-                                            FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                                    Toast.makeText(LoginActivity.this, user.get("username") + "is Log in successfully!", Toast.LENGTH_SHORT).show();
                                     transitionToSocialMediaActivity();
                                 }
                             }

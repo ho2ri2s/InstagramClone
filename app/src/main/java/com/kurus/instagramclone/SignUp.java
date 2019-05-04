@@ -3,17 +3,18 @@ package com.kurus.instagramclone;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-import com.shashank.sony.fancytoastlib.FancyToast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,9 +64,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 if (edtUsername.getText().toString().equals("") ||
                         edtEnterPassword.getText().toString().equals("") ||
                         edtEnterEmail.getText().toString().equals("")) {
-                    FancyToast.makeText(SignUp.this,
-                            "Email, Username, Password is required!",
-                            FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                    Toast.makeText(this, "Email, Username, Password is required!", Toast.LENGTH_SHORT).show();
 
                 } else {
                     final ParseUser appUser = new ParseUser();
@@ -81,10 +80,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
-                                FancyToast.makeText(SignUp.this, appUser.get("username") + "is signed up successfully!", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                                Toast.makeText(SignUp.this, appUser.get("username") + "is signed up successfully!", Toast.LENGTH_SHORT).show();
                                 transitionToSocialMediaActivity();
                             } else {
-                                FancyToast.makeText(SignUp.this, e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
+                                Toast.makeText(SignUp.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             progressDialog.dismiss();
                         }
